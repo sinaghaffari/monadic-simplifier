@@ -59,6 +59,7 @@ Note: `Step[A]` is also implicitly be converted to `Future[A]`, which is why the
 | `monadic-simplifier`             | `Option[A]`                    | `Throwable`             | `A`                         |
 | `monadic-simplifier`             | `Try[A]`                       | N/A                     | `A`                         |
 | `monadic-simplifier`             | `Future[Either[Throwable, A]]` | N/A                     | `A`                         |
+| `monadic-simplifier`             | `Future[Either[B, A]]`         | `B => Throwable`        | `A`                         |
 | `monadic-simplifier`             | `Future[A]`                    | N/A                     | `A`                         |
 | `monadic-simplifier`             | `Future[Option[A]]`            | `Throwable`             | `A`                         |
 | `monadic-simplifier`             | `Either[Throwable, A]`         | N/A                     | `A`                         |

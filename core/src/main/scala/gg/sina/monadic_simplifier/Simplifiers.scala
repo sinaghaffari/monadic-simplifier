@@ -5,8 +5,18 @@ import scala.language.implicitConversions
 import scala.util.{Failure, Success, Try}
 
 object Simplifiers {
-  implicit class FutureEitherOps[A](futureEither: Future[Either[Throwable, A]]) {
-    def ?| : Step[A] = Step(futureEither)
+  implicit class FutureEitherThrowableOps[A](futureEither: Future[Either[Throwable, A]]) {
+    def ?|(implicit executionContext: ExecutionContext) : Step[A] = for {
+      either <- new FutureOps(futureEither).?|
+      result <- new EitherThrowableOps(either).?|
+    } yield result
+  }
+
+  implicit class FutureEitherOps[A, B](futureEither: Future[Either[B, A]]) {
+    def ?|(fn: B => Throwable)(implicit ec: ExecutionContext): Step[A] = for {
+      either <- new FutureOps(futureEither).?|
+      result <- new EitherOps(either).?|(fn)
+    } yield result
   }
 
   implicit class FutureOps[A](future: Future[A]) {
