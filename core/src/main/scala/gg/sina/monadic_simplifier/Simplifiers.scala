@@ -136,7 +136,10 @@ object Simplifiers {
         case Left(_) => true
         case _ => false
       })
+
+    def toFutureTry(implicit ec: ExecutionContext): Future[Try[A]] = run.map(_.toTry)
+    def toFuture(implicit ec: ExecutionContext): Future[A] = toFutureTry.map(_.get)
   }
 
-  implicit def stepToFuture[A](step: Step[A])(implicit ec: ExecutionContext): Future[A] = step.run.map(_.toTry.get)
+  implicit def stepToFuture[A](step: Step[A])(implicit ec: ExecutionContext): Future[A] = step.toFuture
 }
