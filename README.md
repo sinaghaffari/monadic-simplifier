@@ -62,5 +62,6 @@ Note: `Step[A]` is also implicitly be converted to `Future[A]`, which is why the
 | `monadic-simplifier`             | `Future[A]`                    | N/A                     | `A`                         |
 | `monadic-simplifier`             | `Future[Option[A]]`            | `Throwable`             | `A`                         |
 | `monadic-simplifier`             | `Either[Throwable, A]`         | N/A                     | `A`                         |
+| `monadic-simplifier`             | `Either[B, A]`                 | `B => Throwable`        | `A`                         |
 | `monadic-simplifier`             | `Future[Boolean]`              | `Throwable`             | `A`                         |
 | `monadic-simplifier-play-json`   | `JsResult[A]`                  | N/A                     | `A`                         |
