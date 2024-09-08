@@ -13,7 +13,7 @@ object PlayJsonSimplifiers {
      *
      * @return [[Step]] analogous to this object.
      */
-    def ?| : Step[A] = ?|(JsResult.Exception)
+    def ?| : Step[A] = ?|(JsResult.Exception.apply)
 
     /**
      * Convert to [[Step]].
