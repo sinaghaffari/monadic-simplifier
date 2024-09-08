@@ -31,8 +31,12 @@ object Simplifiers {
     } yield o
   }
 
-  implicit class EitherOps[A](either: Either[Throwable, A]) {
+  implicit class EitherThrowableOps[A](either: Either[Throwable, A]) {
     def ?| : Step[A] = Step(Future.successful(either))
+  }
+
+  implicit class EitherOps[A, B](either: Either[B, A]) {
+    def ?|(fn: B => Throwable): Step[A] = Step(Future.successful(either.left.map(fn)))
   }
 
   implicit class TryOps[A](`try`: Try[A]) {
