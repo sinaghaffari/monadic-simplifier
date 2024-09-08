@@ -53,17 +53,17 @@ Note: `Step[A]` is also implicitly be converted to `Future[A]`, which is why the
 
 ## Supported Conversions
 
-| Defining Module                  | Source Type                    | Type of right hand side | Type of the extracted value |
-|----------------------------------|--------------------------------|-------------------------|-----------------------------|
-| `monadic-simplifier`             | `Boolean`                      | `Throwable`             | `Unit`                      |
-| `monadic-simplifier`             | `Option[A]`                    | `Throwable`             | `A`                         |
-| `monadic-simplifier`             | `Try[A]`                       | N/A                     | `A`                         |
-| `monadic-simplifier`             | `Future[Either[Throwable, A]]` | N/A                     | `A`                         |
-| `monadic-simplifier`             | `Future[Either[B, A]]`         | `B => Throwable`        | `A`                         |
-| `monadic-simplifier`             | `Future[A]`                    | N/A                     | `A`                         |
-| `monadic-simplifier`             | `Future[Option[A]]`            | `Throwable`             | `A`                         |
-| `monadic-simplifier`             | `Either[Throwable, A]`         | N/A                     | `A`                         |
-| `monadic-simplifier`             | `Either[B, A]`                 | `B => Throwable`        | `A`                         |
-| `monadic-simplifier`             | `Future[Boolean]`              | `Throwable`             | `A`                         |
-| `monadic-simplifier-play-json`   | `JsResult[A]`                  | N/A                     | `A`                         |
+| Defining Module                | Source Type                    | Type of right hand side | Type of the extracted value |
+|--------------------------------|--------------------------------|-------------------------|-----------------------------|
+| `monadic-simplifier`           | `Boolean`                      | `Throwable`             | `Unit`                      |
+| `monadic-simplifier`           | `Option[A]`                    | `Throwable`             | `A`                         |
+| `monadic-simplifier`           | `Try[A]`                       | N/A                     | `A`                         |
+| `monadic-simplifier`           | `Future[Either[Throwable, A]]` | N/A                     | `A`                         |
+| `monadic-simplifier`           | `Future[Either[B, A]]`         | `B => Throwable`        | `A`                         |
+| `monadic-simplifier`           | `Future[A]`                    | N/A                     | `A`                         |
+| `monadic-simplifier`           | `Future[Option[A]]`            | `Throwable`             | `A`                         |
+| `monadic-simplifier`           | `Either[Throwable, A]`         | N/A                     | `A`                         |
+| `monadic-simplifier`           | `Either[B, A]`                 | `B => Throwable`        | `A`                         |
+| `monadic-simplifier`           | `Future[Boolean]`              | `Throwable`             | `Unit`                      |
+| `monadic-simplifier-play-json` | `JsResult[A]`                  | N/A                     | `A`                         |
 | `monadic-simplifier-play-json` | `JsResult[A]`                  | `JsError => Throwable`  | `A`                         |
