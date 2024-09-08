@@ -36,9 +36,9 @@ object Simplifiers {
 
   implicit class FutureOptionOps[A](futureOption: Future[Option[A]]) {
     def ?|(ex: Throwable)(implicit executionContext: ExecutionContext): Step[A] = for {
-      f <- new FutureOps(futureOption).?|
-      o <- f.?|(ex)
-    } yield o
+      option <- new FutureOps(futureOption).?|
+      result <- new OptionOps(option).?|(ex)
+    } yield result
   }
 
   implicit class EitherThrowableOps[A](either: Either[Throwable, A]) {
@@ -58,8 +58,10 @@ object Simplifiers {
   }
 
   implicit class FutureBooleanOps(futureBoolean: Future[Boolean]) {
-    def ?|(ex: Throwable)(implicit executionContext: ExecutionContext): Step[Unit] =
-      new FutureOps(futureBoolean).?|.flatMap(_.?|(ex))
+    def ?|(ex: Throwable)(implicit executionContext: ExecutionContext): Step[Unit] = for {
+      boolean <- new FutureOps(futureBoolean).?|
+      result <- new BooleanOps(boolean).?|(ex)
+    } yield result
   }
 
   final case class Step[+A](run: Future[Either[Throwable, A]]) {
